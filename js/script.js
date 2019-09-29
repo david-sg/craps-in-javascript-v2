@@ -230,9 +230,11 @@ var disableBets = function () {
 
 
 var oddsBetClicked = function (event) {
-	console.log ('odds bet clicked');
+	document.getElementById("win-lose").style.display = "none";
 	var betValue = event.target.value;
 	var maxBet = playerData.amountBet * oddsAllowed;
+	console.log ('odds bet clicked: ' + betValue);
+	console.log ('max bet: ' + maxBet);
 // try yolo bet first
 	if (betValue === 'yolo'){
 		console.log('odds yolo clicked');
@@ -266,6 +268,42 @@ var oddsBetClicked = function (event) {
 		showPlayerInfo();
 		return true;
 	}
+
+	// calculations for rest of buttons 
+	betValue = Number(betValue);
+
+	// check if bet value plus existing bet is more than max odds allowed, and also not over the bankroll
+
+	// simple bankroll check
+	//check bank balance
+	if (playerData.bankroll + playerData.oddsBet + betValue < 0 && betValue > 0) {
+	// show them a warning
+		document.getElementById("win-lose").style.display = "";
+		document.getElementById("win-lose").innerText = "You can not bet more than your bankroll!";
+		return true;
+	} 
+	// check to make sure the bet isnt more than the max allowed by the odds
+	if ((betValue + playerData.oddsBet) > maxBet) {
+	// show them a warning
+		document.getElementById("win-lose").style.display = "";
+		document.getElementById("win-lose").innerText = "You can't bet more than the max odds allowed";
+		return true;
+	} 
+
+// prevent negative odds bets
+	if ((playerData.oddsBet + betValue) < 0 ) {
+		return true;
+	} 
+
+// output of allowed bet
+
+	playerData.oddsBet = playerData.oddsBet + betValue;
+		// decrease the players bankroll, or increase it up to the amount they have in the current bet
+	playerData.bankroll = playerData.bankroll - betValue;
+	document.getElementById("odds-bet").innerText = "$"+ playerData.oddsBet;
+
+	showPlayerInfo();
+	return true;
 
 }
 
