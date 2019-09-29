@@ -26,8 +26,12 @@ var oddsPayoff = {
 
 var diceSum=null;
 var diceCounter = 0;
-
 var oddsAllowed = 3;
+
+var round = function (value) {
+  return Number.parseFloat(value).toFixed(2);
+}
+
 
 var gameInitialize = function () {
 	// clear the input area
@@ -453,12 +457,15 @@ document.getElementById('player-info').innerHTML = "<h3>Player Info</h3>";
 	li.textContent = "Name: " + playerData.name;
 	ulInput.appendChild(li);
 	li = document.createElement("li");
+	playerData.bankroll=round (playerData.bankroll)
 	li.textContent = "Bankroll: $" + playerData.bankroll;
 	ulInput.appendChild(li);
 	li = document.createElement("li");
+	playerData.wins=round (playerData.wins)
 	li.textContent = "Won: $" + playerData.wins;
 	ulInput.appendChild(li);
 	li = document.createElement("li");
+	playerData.losses=round (playerData.losses)
 	li.textContent = "Losses: $" + playerData.losses;
 	ulInput.appendChild(li);
 	li = document.createElement("li");
