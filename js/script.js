@@ -195,7 +195,7 @@ var enableButtonsOdds = function () {
 	// iterate on all bet buttons and enable them...
 	const allBetButtons = document.querySelectorAll('.bet');
 	for (var i = 0; i <  allBetButtons.length; i++) {
-		allBetButtons[i].addEventListener('click', OddsBetClicked );
+		allBetButtons[i].addEventListener('click', oddsBetClicked );
 	}
 
 	// change color of roll button and enable roll button
@@ -223,10 +223,36 @@ var disableBets = function () {
 }; 
 
 
-var OddsBetClicked = function (event) {
-console.log ('odds bet clicked');
-
-
+var oddsBetClicked = function (event) {
+	console.log ('odds bet clicked');
+	var betValue = event.target.value;
+	var maxBet = playerData.amountBet * oddsAllowed;
+// try yolo bet first
+	if (betValue === 'yolo'){
+		console.log('odds yolo clicked');
+			if (playerData.bankroll === 0){
+				document.getElementById("win-lose").style.display = "";
+				document.getElementById("win-lose").innerText = "Nothing left to YOLO!";
+				return true;
+			}
+			if (playerData.oddsBet === maxBet){
+				document.getElementById("win-lose").style.display = "";
+				document.getElementById("win-lose").innerText = "Max Odds Bet Made";
+				return true;
+			}
+		// make the bet at most the limit off the odds allowed;		
+		if (maxBet > playerData.bankroll) {
+			playerData.oddsBet = playerData.bankroll;
+			playerData.bankroll = 0;
+		} else {
+			playerData.oddsBet = maxBet;
+			playerData.bankroll = playerData.bankroll - playerData.oddsBet;
+		}
+		console.log('odds bet: ' + playerData.oddsBet);
+		document.getElementById("odds-bet").innerText = "$"+ playerData.oddsBet;
+		showPlayerInfo();
+		return true;
+	}
 
 }
 
