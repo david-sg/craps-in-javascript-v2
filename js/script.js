@@ -59,7 +59,9 @@ var winner = function (){
 	document.getElementById("win-lose").classList.add('bg-success');
 	document.getElementById("win-lose").removeAttribute('style');
 	// end
+	// need to add in odds bet here
 
+	// end add of odds bet
 	playerData.bankroll = (playerData.amountBet * 2) + playerData.bankroll;
 	playerData.gamesPlayed++;
 	playerData.wins = 	playerData.wins + playerData.amountBet;
@@ -74,13 +76,14 @@ var loser = function (){
 		if (playerData.point === 0) {
 		document.getElementById("come-out-number").innerText = playerData.point;
 		}
-	document.getElementById("win-lose").innerHTML = '<h2>You Lost $' + playerData.amountBet + "!</h2>";
+	var totalLost = playerData.amountBet + playerData.oddsBet;
+	document.getElementById("win-lose").innerHTML = '<h2>You Lost $' + totalLost + "!</h2>";
 
 	document.getElementById("win-lose").removeAttribute('style');
 	document.getElementById("win-lose").classList.remove('bg-success');
 	document.getElementById("win-lose").classList.add('bg-warning');
 	playerData.gamesPlayed++;
-	playerData.losses = playerData.losses + playerData.amountBet;
+	playerData.losses = playerData.losses + totalLost;
 	startNewRound()
 	return true;
 }
