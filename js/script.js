@@ -18,11 +18,11 @@ var playerData = {
 	gameState: null
 };
 
-// var oddsPayoff = {
-// 	fourTen: 1/2,
-// 	fiveNine: 2/3,
-// 	sixEight: 5/6
-// };
+var oddsPayoff = {
+	fourTen: 2,
+	fiveNine: 1.5,
+	sixEight: 1.2
+};
 
 var diceSum=null;
 var diceCounter = 0;
@@ -44,9 +44,11 @@ var gameInitialize = function () {
 
 var startNewRound = function () {
 	showPlayerInfo();
+
 	playerData.point = 0;
 	// allow betting again
 	//reset bet amount
+	disableOdds();
 	enableButtons();
 	// clear betting area
 	playerData.amountBet = 0;
@@ -64,7 +66,19 @@ var winner = function (){
 	console.log('winner')
 	// calculate total winnings
 	// double to account for amount bet
-	var totalWin = (playerData.amountBet * 2) + (playerData.oddsBet * 2);
+	// calculate the odds bets...
+		var oddsWin =0;
+	if (playerData.point ===4 || playerData.point ===10) {
+		oddsWin = playerData.oddsBet * oddsPayoff.fourTen;
+	} else 	if (playerData.point ===5 || playerData.point ===9) {
+		oddsWin = playerData.oddsBet * oddsPayoff.fiveNine;
+	} else  if (playerData.point ===6 || playerData.point ===8) {
+		oddsWin = playerData.oddsBet * oddsPayoff.sixEight;
+	} 
+
+
+
+	var totalWin = (playerData.amountBet * 2) + oddsWin;
 	// single for simple calculateion
 	var simpleWin = playerData.amountBet + playerData.oddsBet;
 
@@ -72,11 +86,7 @@ var winner = function (){
 	document.getElementById("win-lose").classList.remove('bg-warning');
 	document.getElementById("win-lose").classList.add('bg-success');
 	document.getElementById("win-lose").removeAttribute('style');
-	// end
-	// need to add in odds bet here
 
-	// end add of odds bet
-	//simple model 1:1
 	playerData.bankroll = playerData.bankroll + totalWin;
 	playerData.gamesPlayed++;
 	playerData.wins = 	playerData.wins + simpleWin;
@@ -241,6 +251,17 @@ var disableBets = function () {
 
 }; 
 
+
+var disableOdds = function () {
+	console.log ('odds disabled');
+	const allBetButtons = document.querySelectorAll('.bet');
+	for (var i = 0; i <  allBetButtons.length; i++) {
+		// allBetButtons[i].removeEventListener('clicked', betClicked );
+		allBetButtons[i].removeEventListener('click', oddsClicked, false);
+	}
+ 	// document.getElementsByClassName('all-bets')[0].style.pointerEvents = 'none';
+
+};
 
 var oddsBetClicked = function (event) {
 	document.getElementById("win-lose").style.display = "none";
