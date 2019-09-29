@@ -253,8 +253,10 @@ var oddsBetClicked = function (event) {
 			playerData.oddsBet = playerData.bankroll;
 			playerData.bankroll = 0;
 		} else {
-			playerData.oddsBet = maxBet;
-			playerData.bankroll = playerData.bankroll - playerData.oddsBet;
+			// adjust to account for existing bet before updating the bankroll
+			var adjustedMaxBet = maxBet - playerData.oddsBet;
+			playerData.oddsBet = maxBet;			
+			playerData.bankroll = playerData.bankroll - adjustedMaxBet;
 		}
 		console.log('odds bet: ' + playerData.oddsBet);
 		document.getElementById("odds-bet").innerText = "$"+ playerData.oddsBet;
@@ -290,7 +292,7 @@ var oddsBetClicked = function (event) {
 		return true;
 	} 
 
-// prevent negative odds bets, only allowto go to 0
+// prevent negative odds bets, only allow to go to 0
 	if ((playerData.oddsBet + betValue) < 0 ) {
 		console.log	('negative bet check, current odds bet: ' + playerData.oddsBet )
 		console.log	('bet value to reduce: ' + betValue )
