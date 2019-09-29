@@ -28,9 +28,12 @@ var diceSum=null;
 var diceCounter = 0;
 var oddsAllowed = 3;
 
-var round = function (value) {
-  return Number.parseFloat(value).toFixed(2);
+function round(value) {
+    // var sign = value >= 0 ? 1 : -1;
+    // return (Math.round((value*Math.pow(10,2)) + (sign*0.001)) / Math.pow(10,2)).toFixed(2);
+    return value;
 }
+
 
 
 var gameInitialize = function () {
@@ -457,16 +460,20 @@ document.getElementById('player-info').innerHTML = "<h3>Player Info</h3>";
 	li.textContent = "Name: " + playerData.name;
 	ulInput.appendChild(li);
 	li = document.createElement("li");
+
 	playerData.bankroll=round (playerData.bankroll)
 	li.textContent = "Bankroll: $" + playerData.bankroll;
 	ulInput.appendChild(li);
 	li = document.createElement("li");
+
 	playerData.wins=round (playerData.wins)
 	li.textContent = "Won: $" + playerData.wins;
 	ulInput.appendChild(li);
 	li = document.createElement("li");
+
 	playerData.losses=round (playerData.losses)
 	li.textContent = "Losses: $" + playerData.losses;
+
 	ulInput.appendChild(li);
 	li = document.createElement("li");
 	li.textContent = "Games Played: " + playerData.gamesPlayed;
