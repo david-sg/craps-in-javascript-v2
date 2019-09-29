@@ -42,6 +42,7 @@ var startNewRound = function () {
 	enableButtons();
 	// clear betting area
 	playerData.amountBet = 0;
+	playerData.oddsBet = 0;
 	playerData.gameState = 'come';
 	document.getElementById("current-bet").innerText = "$"+ playerData.amountBet;
 }
