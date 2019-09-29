@@ -6,7 +6,6 @@ window.onload = function() {
 };
 
 
-var betDefault = 5;
 var playerData = {
 	name: null,
 	bankroll: 1000,
@@ -14,7 +13,9 @@ var playerData = {
 	losses: 0,
 	gamesPlayed: 0,
 	amountBet:0,
-	point: null
+	oddsBet: 0,
+	point: null,
+	gameState: null
 };
 var diceSum=null;
 var diceCounter = 0;
@@ -39,6 +40,7 @@ var startNewRound = function () {
 	enableButtons();
 	// clear betting area
 	playerData.amountBet = 0;
+	playerData.gameState = 'come';
 	document.getElementById("current-bet").innerText = "$"+ playerData.amountBet;
 }
 
@@ -82,6 +84,11 @@ var loser = function (){
 
 var newPoint = function (){
 	disableBets();
+	// v2 change from disable to enable for odds...
+	if (playerData.amountBet >0) {
+		enableButtonsOdds();
+		}
+	playerData.gameState = 'point'
 	console.log('New Point: ' + playerData.point)
 	// show come out number
 	document.getElementById("display-come-out-number").style.visibility = "visible";
@@ -182,6 +189,25 @@ var enableButtons = function () {
 };
 
 
+var enableButtonsOdds = function () {
+	// iterate on all bet buttons and enable them...
+	const allBetButtons = document.querySelectorAll('.bet');
+	for (var i = 0; i <  allBetButtons.length; i++) {
+		allBetButtons[i].addEventListener('click', OddsBetClicked );
+	}
+
+	// change color of roll button and enable roll button
+	document.getElementById("roll-button").classList.remove('btn-secondary');
+	document.getElementById("roll-button").classList.add('btn-primary');
+
+// not needed, should be enabled already
+	// var rollButton = document.querySelector('#roll-button');
+	// rollButton.addEventListener('click', rollClicked );
+
+
+};
+
+
 
 var disableBets = function () {
 	console.log ('bets disabled');
@@ -194,6 +220,13 @@ var disableBets = function () {
 
 }; 
 
+
+var OddsBetClicked = function (event) {
+console.log ('odds bet clicked');
+
+
+
+}
 
 var betClicked = function (event) {
 // clear the warning
