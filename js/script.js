@@ -44,7 +44,6 @@ var gameInitialize = function () {
 
 var startNewRound = function () {
 	showPlayerInfo();
-	document.getElementById("come-out-number").innerText = "";
 	playerData.point = 0;
 	// allow betting again
 	//reset bet amount
@@ -179,6 +178,10 @@ var diceTimer =	function () {
 }
 
 var rollDice = function () {
+
+	if (playerData.gameState ==="come") {
+		document.getElementById("display-come-out-number").style.visibility = "hidden";
+		}
 
 	var dice1 = Math.floor( (Math.random() * 6)+1);
 	var dice2 = Math.floor( (Math.random() * 6)+1);
