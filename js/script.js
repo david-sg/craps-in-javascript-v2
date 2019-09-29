@@ -17,6 +17,13 @@ var playerData = {
 	point: null,
 	gameState: null
 };
+
+// var oddsPayoff = {
+// 	fourTen: 1/2,
+// 	fiveNine: 2/3,
+// 	sixEight: 5/6
+// };
+
 var diceSum=null;
 var diceCounter = 0;
 
@@ -55,8 +62,13 @@ var winner = function (){
 	document.getElementById("display-come-out-number").style.visibility = "visible";
 	document.getElementById("come-out-number").innerText = playerData.point;
 	console.log('winner')
-	// this isnt working?
-	document.getElementById("win-lose").innerHTML = '<h2>Winner, Winner, Chicken Dinner!\n <br>You Won $' + playerData.amountBet + "</h2>";
+	// calculate total winnings
+	// double to account for amount bet
+	var totalWin = (playerData.amountBet * 2) + (playerData.oddsBet * 2);
+	// single for simple calculateion
+	var simpleWin = playerData.amountBet + playerData.oddsBet;
+
+	document.getElementById("win-lose").innerHTML = '<h2>Winner, Winner, Chicken Dinner!\n <br>You Won $' + totalWin + "</h2>";
 	document.getElementById("win-lose").classList.remove('bg-warning');
 	document.getElementById("win-lose").classList.add('bg-success');
 	document.getElementById("win-lose").removeAttribute('style');
@@ -64,9 +76,10 @@ var winner = function (){
 	// need to add in odds bet here
 
 	// end add of odds bet
-	playerData.bankroll = (playerData.amountBet * 2) + playerData.bankroll;
+	//simple model 1:1
+	playerData.bankroll = playerData.bankroll + totalWin;
 	playerData.gamesPlayed++;
-	playerData.wins = 	playerData.wins + playerData.amountBet;
+	playerData.wins = 	playerData.wins + simpleWin;
 	startNewRound()
 	return true;
 }
@@ -278,7 +291,7 @@ var oddsBetClicked = function (event) {
 
 	// simple bankroll check
 	//check bank balance
-	if (playerData.bankroll + playerData.oddsBet + betValue < 0 && betValue > 0) {
+	if (playerData.bankroll - playerData.oddsBet - betValue < 0 && betValue > 0) {
 	// show them a warning
 		document.getElementById("win-lose").style.display = "";
 		document.getElementById("win-lose").innerText = "You can not bet more than your bankroll!";
@@ -302,9 +315,6 @@ var oddsBetClicked = function (event) {
 		showPlayerInfo();
 		return true;
 	} 
-
-
-
 
 // output of allowed bet
 
