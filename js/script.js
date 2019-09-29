@@ -290,10 +290,19 @@ var oddsBetClicked = function (event) {
 		return true;
 	} 
 
-// prevent negative odds bets
+// prevent negative odds bets, only allowto go to 0
 	if ((playerData.oddsBet + betValue) < 0 ) {
+		console.log	('negative bet check, current odds bet: ' + playerData.oddsBet )
+		console.log	('bet value to reduce: ' + betValue )
+		playerData.bankroll = playerData.bankroll + playerData.oddsBet;
+		playerData.oddsBet = 0;
+		document.getElementById("odds-bet").innerText = "$"+ playerData.oddsBet;
+		showPlayerInfo();
 		return true;
 	} 
+
+
+
 
 // output of allowed bet
 
