@@ -66,7 +66,7 @@ ul {
     color: black;
 }
 
-#current-bet {
+#current-bet, #odds-bet{
   max-width: 100px;
 
 }
@@ -112,5 +112,11 @@ ul {
 }
 
 #bet-point-area {
-  min-height: 370px
+  min-height: 375px;
+  margin-top: -40px;
+}
+
+#left-column, #right-column {
+margin-top: -25px;
+
 }
