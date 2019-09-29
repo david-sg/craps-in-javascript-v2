@@ -29,6 +29,7 @@ var gameInitialize = function () {
 	document.getElementById("name-button").style.display = "none";
 	// clear the bets
 	document.getElementById("current-bet").innerText = "$"+ playerData.amountBet;
+	document.getElementById("odds-bet").innerText = "$"+ playerData.oddsBet;
 	enableButtons()
 } 
 
@@ -45,6 +46,7 @@ var startNewRound = function () {
 	playerData.oddsBet = 0;
 	playerData.gameState = 'come';
 	document.getElementById("current-bet").innerText = "$"+ playerData.amountBet;
+	document.getElementById("odds-bet").innerText = "$"+ playerData.oddsBet;
 }
 
 
