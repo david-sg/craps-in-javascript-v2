@@ -20,6 +20,8 @@ var playerData = {
 var diceSum=null;
 var diceCounter = 0;
 
+var oddsAllowed = 3;
+
 var gameInitialize = function () {
 	// clear the input area
 	document.getElementById("name-section").style.display = "none";
@@ -319,11 +321,6 @@ var rollClicked = function (event) {
 	diceTimer();
 }
 
-var gameStart = function (playerName) {
-	showPlayerInfo();
-// get a bet
-}
-
 var showPlayerInfo = function () {
 document.getElementById('player-info').innerHTML = "<h3>Player Info</h3>";
 
@@ -368,7 +365,7 @@ var nameFunction = function (){
 		} else {
 		playerData.name = inputValue;
 		gameInitialize();
-		gameStart(inputValue);
+		showPlayerInfo(inputValue);
 		}
 }
 
