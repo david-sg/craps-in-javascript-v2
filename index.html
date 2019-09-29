@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <link rel="stylesheet" type="text/css" href="css/style.css">
+  <!-- <link rel="stylesheet" type="text/css" href="css/dice.css"> -->
+  <title>Craps in Javascript</title>
+</head>
+
+<body>
+  <div class="container text-center">
+
+<!-- header -->
+   <div class="row">
+      <div class="col-12"><h1>Craps in Javascript</h1>
+      <h2>Let's Roll!</h2></div>
+    </div>
+    <!-- Main Play Area 3 Columns-->
+    <div class="row rowcenter">
+      <div class="col-12 col-sm-2">
+        <!-- left player Info and Bet Size -->
+        <div class="row rowcenter">
+          <div class="col-12 border rounded" id="player-info">
+            <h3>Player Info</h3>
+          <ul class="ml-1">
+            <li>Name: Turing</li>
+            <li>Bank: $1000</li>
+            <li>Wins: 0 </li>
+            <li>Losses: 0</li>
+            <li>Games Played: 0</li>
+          </ul>
+
+          </div>
+          <div class="col-12" id="bet-size">
+              <div class="row rowcenter">
+              <div class="col-12 all-bets" id="bet-size">Bet Size</div>
+              <div class="col-6">
+            <button class="btn btn-success bet" id="plus1" value="1">+$1</button>
+              </div>
+              <div class="col-6">
+            <button class="btn btn-danger bet" id="minus1" value="-1">-$1</button>
+              </div>
+
+              <div class="col-6">
+            <button class="btn btn-success bet" id="plus5" value="5">+$5</button>
+              </div>
+              <div class="col-6">
+            <button class="btn btn-danger bet" id="minus5" value="-5">-$5</button>
+              </div>
+
+
+                            <div class="col-6">
+            <button class="btn btn-success bet" id="plus10" value="10">+$10</button>
+              </div>
+              <div class="col-6">
+            <button class="btn btn-danger bet" id="minus10" value="-10">-$10</button>
+              </div>
+
+                            <div class="col-6">
+            <button class="btn btn-success bet" id="plus50" value="50">+$50</button>
+              </div>
+              <div class="col-6">
+            <button class="btn btn-danger bet" id="minus50" value="-50">-$50</button>
+              </div>
+                            <div class="col-6">
+            <button class="btn btn-success bet" id="plus100" value="100">+$100</button>
+              </div>
+              <div class="col-6">
+            <button class="btn btn-danger bet" id="minus100" value="-100">-$100</button>
+              </div>
+
+                                          <div class="col-6">
+            <button class="btn btn-success bet" id="yolo" value="yolo">YOLO!</button>
+              </div>
+              <div class="col-6">
+            <button class="btn btn-danger bet" id="clear" value="clear">Clear</button>
+              </div>
+
+              </div>
+              <!-- end bet size area -->
+          </div>
+          <!-- end internal left column area -->
+        </div>
+<!-- end left columnn -->
+      </div>
+
+      <!-- begin middle column -->
+      <div class="col-12 col-sm-8">
+        <div class="row">
+         <div class="col-12" id="bet-point-area"> 
+          <div class="row">
+          <div class="col-12" id="display-current-bet">
+            <h3>Current Bet</h3>
+            <button type="button" class="btn btn-info btn-lg" id="current-bet">$5</button>
+          </div>
+           <div class="col-12" id="display-come-out-number">
+            <h3>Your Point</h3>
+            <button type="button" class="btn btn-info btn-lg" id="come-out-number" ></button>
+          </div>
+        </div>
+<!-- info section -->
+        <div class="row">
+            <div class="col rowcenter" id="info-section" >
+              <div class="border bg-success rounded w-75 p-3" id="win-lose" style="display: none;">
+              <h3>Winner, Winner, Chicken Dinner!<br>
+              $5!</h3></div>
+              <div class="rowcenter" id="name-section"></div>
+              </div>
+          </div>
+        </div>
+      </div>
+<!-- rules section -->
+        <div class="row">
+            <div class="col rowcenter" id="rules-section" >
+              <div class="border rounded w-75 p-3" id="rules">
+              <h3>How to Play</h3>
+              <p class="text-left mt-0 mb-0">'Come Out Roll' (Initial Roll)</p>
+              <ul class="ml-1">
+                <li>Roll a 7 or 11 you win! ($10 bet pays $10)</li>
+                <li>Roll a 2, 3 or 12 you lose (craps)</li>
+                <li>Roll any other number that becomes 'The Point'</li>
+                <li>Once a bet is placed, and a roll made, it can not be changed</li>
+              </ul>
+                <p class="text-left mt-0 mb-0">'Point Roll' (Subsequent Rolls)</p>
+              <ul class="ml-1">
+                <li>Roll 'The Point', you win! ($10 bet pays $10)</li>
+                <li>Roll a 7 and you lose (seven out)</li>
+                <li>Roll any other number, roll again till you hit the point, or you seven out</li>
+              </ul>
+              </div> 
+            </div>
+          </div>
+
+<!-- end middle column -->
+      </div>
+
+      <!-- begin right column -->
+      <div class="col-12 col-sm-2">
+          <div class="row">
+            <div class="col-12" id="dice-area">
+              <h3>Current Roll</h3>
+              <div class="show-dice"></div>
+            
+<!-- insert of dice -->
+
+<img src="img/dice1.png" class="dice" id="dice1"><img src="img/dice3.png" class="dice" id="dice2">
+
+
+
+<!-- end dice show -->
+              <h2 id="dice-total">4</h2>
+            </div>
+            <div class="col" id="roll-area"> 
+        <button type="button" class="btn btn-secondary btn-lg" id="roll-button">Roll Dice</button>
+            </div>
+        </div>
+<!-- end right column -->
+          </div>
+        
+<!-- end main play area -->
+        </div>
+<!-- end container -->
+  </div>
+  <script src="js/script.js"></script>
+<!--     <script src="js/dice.js"></script> -->
+</body>
+</html>
