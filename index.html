@@ -92,10 +92,24 @@
         <div class="row">
          <div class="col-12" id="bet-point-area"> 
           <div class="row">
-          <div class="col-12" id="display-current-bet">
-            <h3>Current Bet</h3>
+          
+          <!-- split to come out and odds bets -->
+          <div class="col-12" id="display-bet-area">
+            <div class="row">
+            <div class="col-2"></div>
+            <div class="col-4" id="display-current-bet">
+            <h3>Come Out Bet</h3>
             <button type="button" class="btn btn-info btn-lg" id="current-bet">$5</button>
+            </div>
+            <div class="col-4" id="display-odds-bet">
+            <h3>Odds Bet</h3>
+            <button type="button" class="btn btn-info btn-lg" id="odds-bet">$0</button>
+            </div>
+            <div class="col-2"></div>
+            </div>
           </div>
+
+          <!-- end bet split -->
            <div class="col-12" id="display-come-out-number">
             <h3>Your Point</h3>
             <button type="button" class="btn btn-info btn-lg" id="come-out-number" ></button>
@@ -129,6 +143,12 @@
                 <li>Roll 'The Point', you win! ($10 bet pays $10)</li>
                 <li>Roll a 7 and you lose (seven out)</li>
                 <li>Roll any other number, roll again till you hit the point, or you seven out</li>
+              </ul>                
+                <p class="text-left mt-0 mb-0">'Odds Bet' (Point Roll)</p>
+              <ul class="ml-1">
+                <li>You can place an additional bet on "The Point"</li>
+                <li>These are 'True Odds' and reduce the house edge</li>
+                <li>The payout will vary depending on the number</li>
               </ul>
               </div> 
             </div>
