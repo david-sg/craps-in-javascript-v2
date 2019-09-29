@@ -44,7 +44,7 @@ var gameInitialize = function () {
 
 var startNewRound = function () {
 	showPlayerInfo();
-
+	document.getElementById("come-out-number").innerText = "";
 	playerData.point = 0;
 	// allow betting again
 	//reset bet amount
@@ -56,6 +56,7 @@ var startNewRound = function () {
 	playerData.gameState = 'come';
 	document.getElementById("current-bet").innerText = "$"+ playerData.amountBet;
 	document.getElementById("odds-bet").innerText = "$"+ playerData.oddsBet;
+
 }
 
 
@@ -78,9 +79,9 @@ var winner = function (){
 
 
 
-	var totalWin = (playerData.amountBet * 2) + oddsWin;
+	var totalWin = (playerData.amountBet * 2) +  playerData.oddsBet + oddsWin;
 	// single for simple calculateion
-	var simpleWin = playerData.amountBet + playerData.oddsBet;
+	var simpleWin = playerData.amountBet + oddsWin;
 
 	document.getElementById("win-lose").innerHTML = '<h2>Winner, Winner, Chicken Dinner!\n <br>You Won $' + totalWin + "</h2>";
 	document.getElementById("win-lose").classList.remove('bg-warning');
@@ -257,7 +258,7 @@ var disableOdds = function () {
 	const allBetButtons = document.querySelectorAll('.bet');
 	for (var i = 0; i <  allBetButtons.length; i++) {
 		// allBetButtons[i].removeEventListener('clicked', betClicked );
-		allBetButtons[i].removeEventListener('click', oddsClicked, false);
+		allBetButtons[i].removeEventListener('click', oddsBetClicked, false);
 	}
  	// document.getElementsByClassName('all-bets')[0].style.pointerEvents = 'none';
 
