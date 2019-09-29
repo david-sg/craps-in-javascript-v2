@@ -122,7 +122,7 @@ var loser = function (){
 
 var newPoint = function (){
 	disableBets();
-	// v2 change from disable to enable for odds...
+	// v2 change from disable to enable for odds if a player has made a bet on 'come out'
 	if (playerData.amountBet >0) {
 		enableButtonsOdds();
 		}
@@ -210,7 +210,7 @@ var rollDice = function () {
 			}
 		}
 }
-diceTimer();
+
 
 
 var enableButtons = function () {
@@ -528,6 +528,9 @@ var getName = function () {
 }
 
 // lets get this started....
+// spin them dice
+diceTimer();
+// ask for user's name
 getName();
 
 
