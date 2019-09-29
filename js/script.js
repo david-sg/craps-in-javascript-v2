@@ -253,6 +253,13 @@ var oddsBetClicked = function (event) {
 		showPlayerInfo();
 		return true;
 	}
+	if (betValue === 'clear'){
+		playerData.bankroll = playerData.bankroll + playerData.oddsBet;
+		playerData.oddsBet = 0;
+		document.getElementById("odds-bet").innerText = "$"+ playerData.oddsBet;
+		showPlayerInfo();
+		return true;
+	}
 
 }
 
