@@ -29,9 +29,9 @@ var diceCounter = 0;
 var oddsAllowed = 3;
 
 function round(value) {
-    // var sign = value >= 0 ? 1 : -1;
-    // return (Math.round((value*Math.pow(10,2)) + (sign*0.001)) / Math.pow(10,2)).toFixed(2);
-    return value;
+    var sign = Math.floor(value*100)/100
+    return sign;
+    // return value;
 }
 
 
