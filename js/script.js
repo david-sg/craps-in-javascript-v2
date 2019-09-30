@@ -127,6 +127,10 @@ var loser = function (){
 		if (playerData.point === 0) {
 		document.getElementById("come-out-number").innerText = playerData.point;
 		}
+		if (playerData.point === 3 || playerData.point === 2 || playerData.point === 12) {
+		document.getElementById("come-out-number").innerText = playerData.point;
+		}
+
 	var totalLost = playerData.amountBet + playerData.oddsBet;
 	
 	if (playerData.bankroll ===0) {
