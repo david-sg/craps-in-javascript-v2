@@ -120,3 +120,10 @@ ul {
 margin-top: -25px;
 
 }
+
+#graph-area {
+  margin: 0 auto;
+  border: 1px solid black;
+  height: 45vh;
+  min-height: 45px;
+}
