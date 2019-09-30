@@ -52,11 +52,18 @@ var gameInitialize = function () {
 } 
 
 var showInfo = function (value) {
-	document.getElementById("win-lose").style.display = "";
-	document.getElementById("win-lose").classList.remove('bg-success');
+	clearInfo();
 	document.getElementById("win-lose").classList.add('btn-info');
 	document.getElementById("win-lose").innerHTML = `<h2>${value}</h2>`;
 }
+
+var clearInfo = function () {
+	document.getElementById("win-lose").style.display = "";
+	document.getElementById("win-lose").classList.remove('bg-success');
+	document.getElementById("win-lose").classList.remove('btn-info');
+	document.getElementById("win-lose").classList.remove('bg-warning');
+}
+
 
 var startNewRound = function () {
 	showPlayerInfo();
@@ -97,11 +104,9 @@ var winner = function (){
 	var totalWin = (playerData.amountBet * 2) +  playerData.oddsBet + oddsWin;
 	// single for simple calculateion
 	var simpleWin = playerData.amountBet + oddsWin;
-
+	clearInfo();
 	document.getElementById("win-lose").innerHTML = '<h2>Winner, Winner, Chicken Dinner!\n <br>You Won $' + totalWin + "</h2>";
-	document.getElementById("win-lose").classList.remove('bg-warning');
 	document.getElementById("win-lose").classList.add('bg-success');
-	document.getElementById("win-lose").removeAttribute('style');
 
 	playerData.bankroll = playerData.bankroll + totalWin;
 	playerData.gamesPlayed++;
@@ -119,9 +124,7 @@ var loser = function (){
 		}
 	var totalLost = playerData.amountBet + playerData.oddsBet;
 	document.getElementById("win-lose").innerHTML = '<h2>You Lost $' + totalLost + "!</h2>";
-
-	document.getElementById("win-lose").removeAttribute('style');
-	document.getElementById("win-lose").classList.remove('bg-success');
+	clearInfo();
 	document.getElementById("win-lose").classList.add('bg-warning');
 	playerData.gamesPlayed++;
 	playerData.losses = playerData.losses + totalLost;
