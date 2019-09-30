@@ -48,6 +48,10 @@ var gameInitialize = function () {
 	document.getElementById("current-bet").innerText = "$"+ playerData.amountBet;
 	document.getElementById("odds-bet").innerText = "$"+ playerData.oddsBet;
 	enableButtons()
+	document.getElementById("win-lose").style.display = "";
+	document.getElementById("win-lose").classList.remove('bg-success');
+	document.getElementById("win-lose").classList.add('btn-info');
+	document.getElementById("win-lose").innerHTML = "<h2>Place a bet and Roll!</h2>";
 } 
 
 
