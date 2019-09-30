@@ -16,8 +16,11 @@
 
 <!-- header -->
    <div class="row">
-      <div class="col-12"><h1>Craps in Javascript</h1>
-      <h2>Let's Roll!</h2></div>
+      <div class="col-12">
+      <img src="img/settings-solid.png"  class="float-right" data-toggle="modal" data-target="#myModal" id="settings-icon">
+      <h1>Craps in Javascript</h1>
+      <h2>Let's Roll!</h2>
+      </div>
     </div>
     <!-- Main Play Area 3 Columns-->
     <div class="row rowcenter">
@@ -34,6 +37,8 @@
             <li>Games Played: 0</li>
           </ul>
 
+
+          
           </div>
           <div class="col-12" id="bet-size">
               <div class="row rowcenter">
@@ -193,6 +198,42 @@
         </div>
 <!-- end container -->
   </div>
+
+
+<!-- settings modal  -->
+
+<div class="bg-modal">
+  <div class="modal-contents">
+
+    <div class="close">+</div>
+Change the default settings
+    <div class="text-left">
+      <form>
+      <div class="form-group">
+        <label for="formGroupBankrollInput">Bankroll ($1000 Default)</label>
+        <input type="text" class="form-control" id="bankrollInput" placeholder="1000">
+        <small id="bankrollHelpBlock" class="form-text text-muted">
+        Changing this will update your current bankroll.
+        </small>
+      </div>
+
+
+    <div class="form-group">
+      <label for="odds-select">Odds Ratio (3x Default):</label>
+      <select class="form-control" id="odds-select">
+        <option value='2' id="odds2">2</option>
+        <option value='3' id="odds3" selected>3</option>
+        <option value='5' id="odds5">5</option>
+        <option value='10' id="odds10">10</option>
+        <option value='100' id="odds100">100</option>
+      </select>
+    </div>
+
+    <button type="submit" class="btn btn-primary" id="updateDefaults">Update</button>
+  </form>
+  </div>
+
+
   <script src="js/script.js"></script>
     <script src="js/graph.js"></script>
 <!--     <script src="js/dice.js"></script> -->
