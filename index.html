@@ -8,6 +8,7 @@
   <link rel="stylesheet" type="text/css" href="css/style.css">
   <!-- <link rel="stylesheet" type="text/css" href="css/dice.css"> -->
   <title>Craps in Javascript</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0/dist/Chart.min.js"></script>
 </head>
 
 <body>
@@ -160,6 +161,7 @@
 
       <!-- begin right column -->
       <div class="col-12 col-sm-2" id="right-column">
+          
           <div class="row">
             <div class="col-12" id="dice-area">
               <h3>Current Roll</h3>
@@ -178,6 +180,11 @@
         <button type="button" class="btn btn-secondary btn-lg" id="roll-button">Roll Dice</button>
             </div>
         </div>
+        <div class="row">
+           <div class="col-12" id="graph-area">
+            <canvas id="myChart" width="400" height="400"></canvas>
+           </div>
+         </div>
 <!-- end right column -->
           </div>
         
@@ -186,6 +193,7 @@
 <!-- end container -->
   </div>
   <script src="js/script.js"></script>
+    <script src="js/graph.js"></script>
 <!--     <script src="js/dice.js"></script> -->
 </body>
 </html>
