@@ -128,7 +128,12 @@ var loser = function (){
 		document.getElementById("come-out-number").innerText = playerData.point;
 		}
 	var totalLost = playerData.amountBet + playerData.oddsBet;
+	
+	if (playerData.bankroll ===0) {
+document.getElementById("win-lose").innerHTML = '<h4>You Lost $' + totalLost + "</h4><h1>REKT!!!</h1>";
+	} else {
 	document.getElementById("win-lose").innerHTML = '<h2>You Lost $' + totalLost + "</h2><h4>Place a bet and play again</h4>";
+	}
 	clearInfo();
 	document.getElementById("win-lose").classList.add('bg-warning');
 	playerData.gamesPlayed++;
