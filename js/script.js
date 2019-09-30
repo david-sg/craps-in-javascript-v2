@@ -56,7 +56,7 @@ var gameInitialize = function () {
 var showInfo = function (value) {
 	clearInfo();
 	document.getElementById("win-lose").classList.add('btn-info');
-	document.getElementById("win-lose").innerHTML = `<h2>${value}</h2>`;
+	document.getElementById("win-lose").innerHTML = `<h4>${value}</h4>`;
 }
 
 var clearInfo = function () {
@@ -150,6 +150,12 @@ var newPoint = function (){
 	// show come out number
 	document.getElementById("display-come-out-number").style.visibility = "visible";
 	document.getElementById("come-out-number").innerText = playerData.point;
+	if (playerData.amountBet>0) {
+	showInfo('Place an additional "Odds Bet"<br>(up to 3x your intitial bet),<br>and roll to hit your "Point"');
+	} else {
+	showInfo('Roll to hit your "Point"')
+	}
+
 	return true;
 }
 
@@ -473,7 +479,7 @@ var rollClicked = function (event) {
 
 	// clear your point area (come out)
 	// if this is a new roll, clear
-	if (playerData.point===0) {
+	if (playerData.point===0 || playerData.point===7) {
 	document.getElementById("display-come-out-number").style.visibility = "hidden";
 	}
 	diceTimer();
