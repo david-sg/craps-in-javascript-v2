@@ -48,13 +48,15 @@ var gameInitialize = function () {
 	document.getElementById("current-bet").innerText = "$"+ playerData.amountBet;
 	document.getElementById("odds-bet").innerText = "$"+ playerData.oddsBet;
 	enableButtons()
+	showInfo (`Welcome ${playerData.name}, <br>Place a bet and Roll!`);
+} 
+
+var showInfo = function (value) {
 	document.getElementById("win-lose").style.display = "";
 	document.getElementById("win-lose").classList.remove('bg-success');
 	document.getElementById("win-lose").classList.add('btn-info');
-	document.getElementById("win-lose").innerHTML = "<h2>Place a bet and Roll!</h2>";
-} 
-
-
+	document.getElementById("win-lose").innerHTML = `<h2>${value}</h2>`;
+}
 
 var startNewRound = function () {
 	showPlayerInfo();
@@ -254,12 +256,6 @@ var enableButtonsOdds = function () {
 	// change color of roll button and enable roll button
 	document.getElementById("roll-button").classList.remove('btn-secondary');
 	document.getElementById("roll-button").classList.add('btn-primary');
-
-// not needed, should be enabled already
-	// var rollButton = document.querySelector('#roll-button');
-	// rollButton.addEventListener('click', rollClicked );
-
-
 };
 
 
@@ -271,8 +267,6 @@ var disableBets = function () {
 		// allBetButtons[i].removeEventListener('clicked', betClicked );
 		allBetButtons[i].removeEventListener('click', betClicked, false);
 	}
- 	// document.getElementsByClassName('all-bets')[0].style.pointerEvents = 'none';
-
 }; 
 
 
@@ -283,8 +277,6 @@ var disableOdds = function () {
 		// allBetButtons[i].removeEventListener('clicked', betClicked );
 		allBetButtons[i].removeEventListener('click', oddsBetClicked, false);
 	}
- 	// document.getElementsByClassName('all-bets')[0].style.pointerEvents = 'none';
-
 };
 
 var oddsBetClicked = function (event) {
@@ -293,17 +285,15 @@ var oddsBetClicked = function (event) {
 	var maxBet = playerData.amountBet * oddsAllowed;
 	console.log ('odds bet clicked: ' + betValue);
 	console.log ('max bet: ' + maxBet);
-// try yolo bet first
+// check for the yolo bet first
 	if (betValue === 'yolo'){
 		console.log('odds yolo clicked');
 			if (playerData.bankroll === 0){
-				document.getElementById("win-lose").style.display = "";
-				document.getElementById("win-lose").innerText = "Nothing left to YOLO!";
+					showInfo (`Nothing left to YOLO!`);
 				return true;
 			}
 			if (playerData.oddsBet === maxBet){
-				document.getElementById("win-lose").style.display = "";
-				document.getElementById("win-lose").innerText = "Max Odds Bet Made";
+					showInfo (`Max Odds Bet Made`);
 				return true;
 			}
 		// make the bet at most the limit off the odds allowed;		
@@ -321,6 +311,8 @@ var oddsBetClicked = function (event) {
 		showPlayerInfo();
 		return true;
 	}
+
+	// check if the bets should be cleared
 	if (betValue === 'clear'){
 		playerData.bankroll = playerData.bankroll + playerData.oddsBet;
 		playerData.oddsBet = 0;
@@ -338,15 +330,13 @@ var oddsBetClicked = function (event) {
 	//check bank balance
 	if (playerData.bankroll - playerData.oddsBet - betValue < 0 && betValue > 0) {
 	// show them a warning
-		document.getElementById("win-lose").style.display = "";
-		document.getElementById("win-lose").innerText = "You can not bet more than your bankroll!";
+		showInfo (`You can not bet more than your bankroll!`);
 		return true;
 	} 
 	// check to make sure the bet isnt more than the max allowed by the odds
 	if ((betValue + playerData.oddsBet) > maxBet) {
 	// show them a warning
-		document.getElementById("win-lose").style.display = "";
-		document.getElementById("win-lose").innerText = "You can't bet more than the max odds allowed";
+		showInfo (`You can't bet more than the max odds allowed`);
 		return true;
 	} 
 
@@ -388,8 +378,7 @@ var betClicked = function (event) {
 
 	if (betValue === 'yolo'){
 			if (playerData.bankroll === 0){
-				document.getElementById("win-lose").style.display = "";
-				document.getElementById("win-lose").innerText = "Nothing left to YOLO!";
+				showInfo (`Nothing left to YOLO!`);
 				return true;
 			}
 		playerData.amountBet = playerData.bankroll + playerData.amountBet;
@@ -405,22 +394,19 @@ var betClicked = function (event) {
 	//check bank balance
 	if (playerData.bankroll + betValue < 0 && betValue > 0) {
 	// show them a warning
-		document.getElementById("win-lose").style.display = "";
-		document.getElementById("win-lose").innerText = "You can not bet more than your bankroll!";
+		showInfo (`You can not bet more than your bankroll!`);
 		return true;
 	} 
 	// don't allow removal of bets to go negative
 	if (playerData.bankroll - betValue < 0 && betValue > 0) {
 	// show them a warning
-		document.getElementById("win-lose").style.display = "";
-		document.getElementById("win-lose").innerText = "You can not bet more than your bankroll!";
+		showInfo (`You can not bet more than your bankroll!`);
 		return true;
 	} 
 
 
 	if (playerData.bankroll === 0 && betValue >0){
-		document.getElementById("win-lose").style.display = "";
-		document.getElementById("win-lose").innerText = "You can't bet more than your bankroll!";
+		showInfo (`You can't bet more than your bankroll!`);
 		return true;
 	} 
 
@@ -430,9 +416,6 @@ var betClicked = function (event) {
 		betValue = 0;
 		playerData.bankroll = playerData.bankroll +playerData.amountBet;
 		playerData.amountBet = 0;
-		// document.getElementById("win-lose").style.display = "";
-		// document.getElementById("win-lose").innerText = "You can not go below your current bet!";
-		// return true;
 	} 
 
 	playerData.amountBet = playerData.amountBet + betValue;
