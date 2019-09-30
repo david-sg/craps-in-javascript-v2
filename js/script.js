@@ -138,7 +138,9 @@ var newPoint = function (){
 	if (playerData.amountBet >0) {
 		enableButtonsOdds();
 		}
-	playerData.gameState = 'point'
+	playerData.gameState = 'point';
+	// enable to autoroll button
+	enableAutoRoll();
 	console.log('New Point: ' + playerData.point)
 	// show come out number
 	document.getElementById("display-come-out-number").style.visibility = "visible";
@@ -146,6 +148,16 @@ var newPoint = function (){
 	return true;
 }
 
+var enableAutoRoll = function () {
+	document.getElementById("auto-roll-button").classList.remove('btn-secondary');
+	document.getElementById("auto-roll-button").classList.add('btn-primary');
+	var autoRollButton = document.querySelector('#auto-roll-button');
+	autoRollButton.addEventListener('click', autoRollClicked );	
+}
+
+var autoRollClicked = function () {
+	console.log('autoroll clicked');
+};
 
 
 var gamePlay = function () {
