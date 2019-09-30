@@ -31,6 +31,8 @@ var oddsAllowed = 3;
 var allNumbers = [0,0,0,0,0,0,0,0,0,0,0,0,0];
 var yNumbers = [];
 
+var autoClick =  "";
+
 function round(value) {
     var sign = Math.floor(value*100)/100
     return sign;
@@ -67,6 +69,7 @@ var clearInfo = function () {
 
 var startNewRound = function () {
 	showPlayerInfo();
+	disableAutoRoll();
 	playerData.point = 0;
 	// allow betting again
 	//reset bet amount
@@ -84,6 +87,7 @@ var startNewRound = function () {
 
 
 var winner = function (){
+	clearInterval(autoClick);
 	document.getElementById("display-come-out-number").style.visibility = "visible";
 	document.getElementById("come-out-number").innerText = playerData.point;
 	console.log('winner')
@@ -116,6 +120,7 @@ var winner = function (){
 }
 
 var loser = function (){
+	clearInterval(autoClick);
 	console.log('loser')
 		//to check if the point is not yet established and we don't want to show in 2nd round 
 	document.getElementById("display-come-out-number").style.visibility = "visible"
@@ -155,8 +160,20 @@ var enableAutoRoll = function () {
 	autoRollButton.addEventListener('click', autoRollClicked );	
 }
 
+var disableAutoRoll = function () {
+	var autoRollButton = document.querySelector('#auto-roll-button');
+	autoRollButton.removeEventListener('click', autoRollClicked , false );
+	document.getElementById("auto-roll-button").classList.remove('btn-primary');
+	document.getElementById("auto-roll-button").classList.add('btn-secondary');
+	}
+
 var autoRollClicked = function () {
+	// prevent a loop!
+	clearInterval(autoClick);
+
 	console.log('autoroll clicked');
+	autoClick = setInterval(rollDice, 1500); 
+
 };
 
 
