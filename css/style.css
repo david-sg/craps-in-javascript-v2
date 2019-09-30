@@ -127,3 +127,7 @@ margin-top: -25px;
   height: 45vh;
   min-height: 45px;
 }
+
+.responsive-width {
+    font-size: 3vw;
+}
