@@ -27,3 +27,10 @@ It allowed me to do a lot of DOM manipulation, and design with Bootstrap which i
 It did not require content, but instead relied on random output and betting gameplay. This allowed more focus
 on getting the DOM and conditionals working properly.
 
+
+Tech Used:
+Javascript, html, bootstrap, chart.js.
+
+Unsolved Problems:
+More user testing needed to see player iteraction. Basic gameplay works. 
+Further, multiple players, more automation in betting, ability to adjust defaults by user.
