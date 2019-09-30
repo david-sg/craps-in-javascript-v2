@@ -169,10 +169,12 @@ var disableAutoRoll = function () {
 
 var autoRollClicked = function () {
 	// prevent a loop!
+	disableAutoRoll();
+	rollClicked();
 	clearInterval(autoClick);
 
 	console.log('autoroll clicked');
-	autoClick = setInterval(rollDice, 1500); 
+	autoClick = setInterval(rollClicked, 1500); 
 
 };
 
@@ -182,8 +184,6 @@ var gamePlay = function () {
 // add data for graphing
 allNumbers[diceSum] = allNumbers[diceSum] +1;
 yNumbers = allNumbers.slice(2);
-// yNumbers = [4,3,5,8,7,7,4,3,7.8,3]
-
 addData (myChart, yNumbers)
 
 // re-enable dice roll
