@@ -109,7 +109,7 @@ var winner = function (){
 	// single for simple calculateion
 	var simpleWin = playerData.amountBet + oddsWin;
 	clearInfo();
-	document.getElementById("win-lose").innerHTML = '<h2>Winner, Winner, Chicken Dinner!\n <br>You Won $' + totalWin + "</h2>";
+	document.getElementById("win-lose").innerHTML = '<h3>Winner, Winner, Chicken Dinner!\n <br>You Won $' + totalWin + "</h3><h4>Place a bet and play again</h4>";
 	document.getElementById("win-lose").classList.add('bg-success');
 
 	playerData.bankroll = playerData.bankroll + totalWin;
@@ -128,7 +128,7 @@ var loser = function (){
 		document.getElementById("come-out-number").innerText = playerData.point;
 		}
 	var totalLost = playerData.amountBet + playerData.oddsBet;
-	document.getElementById("win-lose").innerHTML = '<h2>You Lost $' + totalLost + "!</h2>";
+	document.getElementById("win-lose").innerHTML = '<h2>You Lost $' + totalLost + "</h2><h4>Place a bet and play again</h4>";
 	clearInfo();
 	document.getElementById("win-lose").classList.add('bg-warning');
 	playerData.gamesPlayed++;
