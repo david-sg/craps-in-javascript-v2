@@ -28,6 +28,9 @@ var diceSum=null;
 var diceCounter = 0;
 var oddsAllowed = 3;
 
+var allNumbers = [0,0,0,0,0,0,0,0,0,0,0,0,0];
+var yNumbers = [];
+
 function round(value) {
     var sign = Math.floor(value*100)/100
     return sign;
@@ -138,6 +141,13 @@ var newPoint = function (){
 
 var gamePlay = function () {
 
+// add data for graphing
+allNumbers[diceSum] = allNumbers[diceSum] +1;
+yNumbers = allNumbers.slice(2);
+// yNumbers = [4,3,5,8,7,7,4,3,7.8,3]
+
+addData (myChart, yNumbers)
+
 // re-enable dice roll
 	var rollButton = document.querySelector('#roll-button');
 	rollButton.addEventListener('click', rollClicked );	
@@ -185,7 +195,6 @@ var diceTimer =	function () {
 }
 
 var rollDice = function () {
-
 	if (playerData.gameState ==="come") {
 		document.getElementById("display-come-out-number").style.visibility = "hidden";
 		}
