@@ -50,6 +50,7 @@ var gameInitialize = function () {
 	// clear the bets
 	document.getElementById("current-bet").innerText = "$"+ playerData.amountBet;
 	document.getElementById("odds-bet").innerText = "$"+ playerData.oddsBet;
+	enableRoll();
 	enableButtons()
 	showInfo (`Welcome ${playerData.name}, <br>Place a bet and Roll!`);
 
@@ -110,6 +111,7 @@ var startNewRound = function () {
 	// allow betting again
 	//reset bet amount
 	disableOdds();
+	enableRoll();
 	enableButtons();
 	// clear betting area
 	playerData.amountBet = 0;
@@ -213,6 +215,7 @@ var newPoint = function (){
 		}
 	playerData.gameState = 'point';
 	// enable to autoroll button
+	enableRoll();
 	enableAutoRoll();
 	// console.log('New Point: ' + playerData.point)
 	// show come out number
@@ -244,12 +247,28 @@ var disableAutoRoll = function () {
 var autoRollClicked = function () {
 	// prevent a loop!
 	disableAutoRoll();
+	disableRoll();
 	rollClicked();
 	clearInterval(autoClick);
-	autoClick = setInterval(rollClicked, 1500); 
+	autoClick = setInterval(rollClicked, 1500);
+
 
 };
 
+var enableRoll = function () {
+	document.getElementById("roll-button").classList.remove('btn-secondary');
+	document.getElementById("roll-button").classList.add('btn-primary');
+	var rollButton = document.querySelector('#roll-button');
+	rollButton.addEventListener('click', rollClicked );	
+}
+
+
+var disableRoll = function () {
+	var autoRollButton = document.querySelector('#roll-button');
+	autoRollButton.removeEventListener('click', rollClicked , false );
+	document.getElementById("roll-button").classList.remove('btn-primary');
+	document.getElementById("roll-button").classList.add('btn-secondary');
+	}
 
 var gamePlay = function () {
 
@@ -258,9 +277,6 @@ allNumbers[diceSum] = allNumbers[diceSum] +1;
 yNumbers = allNumbers.slice(2);
 addData (myChart, yNumbers)
 
-// re-enable dice roll
-	var rollButton = document.querySelector('#roll-button');
-	rollButton.addEventListener('click', rollClicked );	
 
 // Next round of play
 document.getElementById("display-come-out-number").style.visibility = "visible";
@@ -339,13 +355,6 @@ var enableButtons = function () {
 		allBetButtons[i].addEventListener('click', betClicked );
 	}
 
-	// change color of roll button and enable roll button
-	document.getElementById("roll-button").classList.remove('btn-secondary');
-	document.getElementById("roll-button").classList.add('btn-primary');
-
-	var rollButton = document.querySelector('#roll-button');
-	rollButton.addEventListener('click', rollClicked );
-
 };
 
 
@@ -355,10 +364,6 @@ var enableButtonsOdds = function () {
 	for (var i = 0; i <  allBetButtons.length; i++) {
 		allBetButtons[i].addEventListener('click', oddsBetClicked );
 	}
-
-	// change color of roll button and enable roll button
-	document.getElementById("roll-button").classList.remove('btn-secondary');
-	document.getElementById("roll-button").classList.add('btn-primary');
 };
 
 
@@ -531,8 +536,8 @@ var betClicked = function (event) {
 
 var rollClicked = function (event) {
 	// disable click of roll to prevent double clicking....
-	var rollButton = document.querySelector('#roll-button');
-	rollButton.removeEventListener('click', rollClicked, false );
+	disableRoll();
+	disableAutoRoll();
 	// go back to default color on dicesum (gray)
 	document.getElementById('dice-total').removeAttribute("style");
 
