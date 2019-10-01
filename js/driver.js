@@ -51,7 +51,7 @@ oddsDriver.defineSteps([
       {
       element: '#bet-size',
         popover: {
-        title: 'Hit a point',
+        title: 'Odds Bet',
         description: 'With a Point, you can place an additional odds bet on this number. This odds bet can be up to 3x your initial bet. Press YOLO to place the maximum odds bet.',
         position: 'right',
         }
