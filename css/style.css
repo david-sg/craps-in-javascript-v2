@@ -45,6 +45,7 @@ span {
   text-align: center;
 }
 
+
 .row:first-of-type {
   margin-top: 20px;
 }
@@ -130,6 +131,8 @@ margin-top: -25px;
   text-align: left;
 }
 
+
+
 .close {
   position: absolute;
   top: 0;
@@ -163,3 +166,22 @@ margin-top: -25px;
   justify-content: center;
   align-items: center;
 }
+
+
+#derek {
+  float: left;
+  width: 200px;
+}
+
+#hansel {
+  float: right;
+  width: 200px;
+}
+
+.mugatu {
+    position: absolute;
+    top: 0;
+}
+
+
+
