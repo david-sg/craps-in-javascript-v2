@@ -40,13 +40,6 @@ function round(value) {
     // return value;
 }
 
-var settingsClicked = function ()
-{
-	console.log('settings clicked')
-	// popup settings area and dim background
-
-}
-
 var gameInitialize = function () {
 	// clear the input area
 	document.getElementById("name-section").style.display = "none";
@@ -74,8 +67,20 @@ var gameInitialize = function () {
 
 
 var updateSettings = function (){
-console.log('update settings submit')
-
+	var inputBankroll = document.querySelector('#bankrollInput'); 	
+	var bankrollValue = Number(inputBankroll.value);
+	if ( isNaN(bankrollValue)=== true){
+		return true;
+	} else {
+		playerData.bankroll = bankrollValue;
+		}
+	var inputOdds = document.querySelector('#odds-select'); 	
+	oddsAllowed = Number(inputOdds.value);
+	// close the popup
+	// refresh the player info section
+	showPlayerInfo();
+	document.querySelector('.bg-modal').style.display = "none";
+	return true;
 }
 
 var showInfo = function (value) {
@@ -180,12 +185,12 @@ var newPoint = function (){
 	playerData.gameState = 'point';
 	// enable to autoroll button
 	enableAutoRoll();
-	console.log('New Point: ' + playerData.point)
+	// console.log('New Point: ' + playerData.point)
 	// show come out number
 	document.getElementById("display-come-out-number").style.visibility = "visible";
 	document.getElementById("come-out-number").innerText = playerData.point;
 	if (playerData.amountBet>0) {
-	showInfo('Place an additional "Odds Bet"<br>(up to 3x your intitial bet),<br>and roll to hit your "Point"');
+	showInfo(`Place an additional "Odds Bet"<br>(up to ${oddsAllowed}x your intitial bet),<br>and roll to hit your "Point"`);
 	} else {
 	showInfo('Roll to hit your "Point"')
 	}
@@ -212,8 +217,6 @@ var autoRollClicked = function () {
 	disableAutoRoll();
 	rollClicked();
 	clearInterval(autoClick);
-
-	console.log('autoroll clicked');
 	autoClick = setInterval(rollClicked, 1500); 
 
 };
@@ -332,7 +335,6 @@ var enableButtonsOdds = function () {
 
 
 var disableBets = function () {
-	console.log ('bets disabled');
 	const allBetButtons = document.querySelectorAll('.bet');
 	for (var i = 0; i <  allBetButtons.length; i++) {
 		// allBetButtons[i].removeEventListener('clicked', betClicked );
@@ -519,6 +521,14 @@ var rollClicked = function (event) {
 }
 
 var showPlayerInfo = function () {
+	// update the settings popup
+	// update the bankroll shown
+	document.getElementById("bankrollInput").setAttribute('value', playerData.bankroll);
+	// update the odds, get existing options list, then rebuid and add the current as selected
+	document.querySelector('#odds-select [value="' + oddsAllowed + '"]').selected = true
+
+
+	// build the player info section
 	document.getElementById('player-info').innerHTML = "<h3>Player Info</h3>";
 
 	var ulInput = document.createElement('ul');
@@ -540,24 +550,20 @@ var showPlayerInfo = function () {
 
 	playerData.losses=round (playerData.losses)
 	li.textContent = "Losses: $" + playerData.losses;
-
 	ulInput.appendChild(li);
+	
 	li = document.createElement("li");
 	li.textContent = "Games Played: " + playerData.gamesPlayed;
+	ulInput.appendChild(li);
+
+	li = document.createElement("li");
+	li.textContent = `Odds Allowed: ${oddsAllowed}x`;
 	ulInput.appendChild(li);
 
 	var thePlayer = document.getElementById("player-info"); 
 	thePlayer.appendChild(ulInput); 
 
-	// update the modal
-	document.getElementById("bankrollInput").setAttribute('value', playerData.bankroll);
 
-	var select = document.getElementById('odds-select');
-	var opt = document.createElement('option');
-    opt.value = oddsAllowed;
-    opt.innerText = oddsAllowed;
-    opt.selected = true;
-    select.appendChild(opt);
 };
 
 
