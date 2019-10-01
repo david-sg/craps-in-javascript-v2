@@ -145,6 +145,12 @@ var winner = function (){
 	playerData.bankroll = playerData.bankroll + totalWin;
 	playerData.gamesPlayed++;
 	playerData.wins = 	playerData.wins + simpleWin;
+
+	// play a chip winnint sound
+	if (playerData.wins > 0){
+		var snd = new Audio("sounds/chips-won.mp3"); // buffers automatically when created
+		snd.play()
+		}
 	startNewRound()
 	return true;
 }
