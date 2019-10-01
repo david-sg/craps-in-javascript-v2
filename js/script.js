@@ -32,7 +32,7 @@ var oddsAllowed = 3;
 var allNumbers = [0,0,0,0,0,0,0,0,0,0,0,0,0];
 var yNumbers = [];
 
-var autoClick =  "";
+var autoClick = 0;
 
 var soundSwitch = 'on';
 
@@ -116,6 +116,7 @@ var startNewRound = function () {
 	// clear betting area
 	playerData.amountBet = 0;
 	playerData.oddsBet = 0;
+	autoClick=0;
 	playerData.gameState = 'come';
 	document.getElementById("current-bet").innerText = "$"+ playerData.amountBet;
 	document.getElementById("odds-bet").innerText = "$"+ playerData.oddsBet;
@@ -246,6 +247,7 @@ var disableAutoRoll = function () {
 
 var autoRollClicked = function () {
 	// prevent a loop!
+	autoClick=0;
 	disableAutoRoll();
 	disableRoll();
 	rollClicked();
@@ -293,7 +295,7 @@ if (playerData.point >0) {
 	} else {
 
 // check if a single roll completed and show buttons again
-	if (playerData.point >0){
+	if (autoClick ===0){
 		enableRoll();
 		enableAutoRoll();
 	}
