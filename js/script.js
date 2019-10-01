@@ -34,6 +34,8 @@ var yNumbers = [];
 
 var autoClick =  "";
 
+var soundSwitch = 'on';
+
 function round(value) {
     var sign = Math.floor(value*100)/100
     return sign;
@@ -74,8 +76,12 @@ var updateSettings = function (){
 	} else {
 		playerData.bankroll = bankrollValue;
 		}
+	// get odds
 	var inputOdds = document.querySelector('#odds-select'); 	
 	oddsAllowed = Number(inputOdds.value);
+	// check sounds
+	var inputSound = document.querySelector('#sound-select'); 	
+	soundSwitch = inputSound.value;
 	// close the popup
 	// refresh the player info section
 	showPlayerInfo();
@@ -146,8 +152,8 @@ var winner = function (){
 	playerData.gamesPlayed++;
 	playerData.wins = 	playerData.wins + simpleWin;
 
-	// play a chip winnint sound
-	if (playerData.wins > 0){
+	// play a chip winning sound
+	if (simpleWin > 0 && soundSwitch === 'on'){
 		var snd = new Audio("sounds/chips-won.mp3"); // buffers automatically when created
 		snd.play()
 		}
@@ -171,13 +177,30 @@ var loser = function (){
 	
 	if (playerData.bankroll ===0) {
 document.getElementById("win-lose").innerHTML = '<h4>You Lost $' + totalLost + "</h4><h1>REKT!!!</h1>";
+
+	//play a losing sound 
+	if (totalLost > 0 && soundSwitch === 'on'){
+		var snd = new Audio("sounds/rekt.mp3"); // buffers automatically when created
+		snd.play()
+		}
+
 	} else {
 	document.getElementById("win-lose").innerHTML = '<h2>You Lost $' + totalLost + "</h2><h4>Place a bet and play again</h4>";
+
+	//play a losing sound 
+	if (totalLost > 0 && soundSwitch === 'on'){
+		var snd = new Audio("sounds/chips-lost.mp3"); // buffers automatically when created
+		snd.play()
+		}
+
 	}
 	clearInfo();
 	document.getElementById("win-lose").classList.add('bg-warning');
 	playerData.gamesPlayed++;
 	playerData.losses = playerData.losses + totalLost;
+
+
+
 	startNewRound()
 	return true;
 }
@@ -532,7 +555,7 @@ var showPlayerInfo = function () {
 	document.getElementById("bankrollInput").setAttribute('value', playerData.bankroll);
 	// update the odds, get existing options list, then rebuid and add the current as selected
 	document.querySelector('#odds-select [value="' + oddsAllowed + '"]').selected = true
-
+	document.querySelector('#sound-select [value="' + soundSwitch+ '"]').selected = true
 
 	// build the player info section
 	document.getElementById('player-info').innerHTML = "<h3>Player Info</h3>";
