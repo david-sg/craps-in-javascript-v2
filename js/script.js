@@ -16,7 +16,8 @@ var playerData = {
 	amountBet:0,
 	oddsBet: 0,
 	point: null,
-	gameState: null
+	gameState: null,
+	driverCount: 0
 };
 
 var oddsPayoff = {
@@ -180,6 +181,8 @@ var loser = function (){
 	
 	if (playerData.bankroll ===0) {
 document.getElementById("win-lose").innerHTML = '<h4>You Lost $' + totalLost + "</h4><h1>REKT!!!</h1>";
+// mugatu head
+// document.getElementById("marquee-area").innerHTML ='<marquee behavior="slide" direction="down" class="mugatu" id="mugatu"><img src="img/mugatu.gif" alt="Flying Mugatu"></marquee>';
 
 	//play a losing sound 
 	if (totalLost > 0 && soundSwitch === 'on'){
@@ -224,6 +227,10 @@ var newPoint = function (){
 	document.getElementById("come-out-number").innerText = playerData.point;
 	if (playerData.amountBet>0) {
 	showInfo(`Place an additional "Odds Bet"<br>(up to ${oddsAllowed}x your intitial bet),<br>and roll to hit your "Point"`);
+	if (playerData.driverCount === 0){ 
+	oddsDriver.start();
+	playerData.driverCount = 1;
+		}
 	} else {
 	showInfo('Roll to hit your "Point"')
 	}
@@ -654,6 +661,7 @@ var getName = function () {
 
 	document.querySelector('#name-input').addEventListener('change', nameFunction); 
 }
+
 
 // lets get this started....
 // spin them dice
