@@ -291,6 +291,13 @@ if (playerData.point >0) {
 		winner();
 		return true;
 	} else {
+
+// check if a single roll completed and show buttons again
+	if (playerData.point >0){
+		enableRoll();
+		enableAutoRoll();
+	}
+
 		return true;
 	}
 
@@ -311,6 +318,8 @@ if (playerData.point >0) {
 			return true;
 		} 
 	}
+
+
 	return true;
 }
 
