@@ -170,12 +170,13 @@ margin-top: -25px;
 
 #derek {
   float: left;
-  width: 200px;
+  max-width: 200px;
+  height: auto;
 }
 
 #hansel {
   float: right;
-  width: 200px;
+  max-width: 200px;
 }
 
 .mugatu {
