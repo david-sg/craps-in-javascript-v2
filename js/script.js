@@ -3,6 +3,7 @@ console.log('start craps game')
 
 window.onload = function() {  
 	hideLoadAreas(); 
+// listen for the modal default changes
 };
 
 
@@ -39,7 +40,12 @@ function round(value) {
     // return value;
 }
 
+var settingsClicked = function ()
+{
+	console.log('settings clicked')
+	// popup settings area and dim background
 
+}
 
 var gameInitialize = function () {
 	// clear the input area
@@ -51,7 +57,26 @@ var gameInitialize = function () {
 	document.getElementById("odds-bet").innerText = "$"+ playerData.oddsBet;
 	enableButtons()
 	showInfo (`Welcome ${playerData.name}, <br>Place a bet and Roll!`);
+
+	// enable the settings button, for the modal popup
+	document.getElementById('settings-icon').addEventListener("click", function() {
+		document.querySelector('.bg-modal').style.display = "flex";
+		});
+	// enable the close button on the modal 
+	document.querySelector('.close').addEventListener("click", function() {
+		document.querySelector('.bg-modal').style.display = "none";
+		});
+	// enable the submit on the settings popup
+	var rollButton = document.querySelector('#updateDefaults');
+	rollButton.addEventListener('click', updateSettings );
+
 } 
+
+
+var updateSettings = function (){
+console.log('update settings submit')
+
+}
 
 var showInfo = function (value) {
 	clearInfo();
@@ -289,7 +314,6 @@ var enableButtons = function () {
 	var rollButton = document.querySelector('#roll-button');
 	rollButton.addEventListener('click', rollClicked );
 
-
 };
 
 
@@ -495,7 +519,7 @@ var rollClicked = function (event) {
 }
 
 var showPlayerInfo = function () {
-document.getElementById('player-info').innerHTML = "<h3>Player Info</h3>";
+	document.getElementById('player-info').innerHTML = "<h3>Player Info</h3>";
 
 	var ulInput = document.createElement('ul');
 	ulInput.setAttribute('class', "ml-1");
@@ -524,6 +548,16 @@ document.getElementById('player-info').innerHTML = "<h3>Player Info</h3>";
 
 	var thePlayer = document.getElementById("player-info"); 
 	thePlayer.appendChild(ulInput); 
+
+	// update the modal
+	document.getElementById("bankrollInput").setAttribute('value', playerData.bankroll);
+
+	var select = document.getElementById('odds-select');
+	var opt = document.createElement('option');
+    opt.value = oddsAllowed;
+    opt.innerText = oddsAllowed;
+    opt.selected = true;
+    select.appendChild(opt);
 };
 
 
