@@ -58,9 +58,6 @@ ul {
   text-align: left;
 }
 
-#roll {
-}
-
 .roll-output {
     font-size: 30px;
     color: black;
@@ -84,10 +81,6 @@ ul {
 .rowcenter {
       display: flex;
     justify-content: center;
-}
-
-.show-dice img {
-  width: 200%;
 }
 
 .name-input {
@@ -131,7 +124,6 @@ margin-top: -25px;
 .responsive-width {
     font-size: 1vw;
 }
-
 
 #settings-icon {
   width:15px;
