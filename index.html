@@ -12,11 +12,12 @@
 </head>
 
 <body>
+  <img src="img/derek.png" id="derek">
+    <img src="img/hansel.png" id="hansel">
   <div class="container text-center">
-
 <!-- header -->
    <div class="row">
-      <div class="col-12">
+      <div class="col-12"> 
       <img src="img/settings-solid.png"  class="float-right" data-toggle="modal" data-target="#myModal" id="settings-icon">
       <h1>Craps in Javascript</h1>
       <h2>Let's Roll!</h2>
@@ -208,6 +209,8 @@
     <div class="close">+</div>
 Change the default settings
     <div class="text-left">
+
+
       <div class="form-group">
         <label for="formGroupBankrollInput">Bankroll ($1000 Default)</label>
         <input type="text" class="form-control" id="bankrollInput" placeholder="1000">
@@ -239,7 +242,7 @@ Change the default settings
 
     <button type="submit" class="btn btn-primary" id="updateDefaults">Update</button>
   </div>
-
+        <div class="marquee" id='marquee-area'></div> 
 
   <script src="js/script.js"></script>
     <script src="js/graph.js"></script>
