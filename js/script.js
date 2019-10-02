@@ -553,6 +553,9 @@ var betClicked = function (event) {
 
 
 var rollClicked = function (event) {
+	// disable betting when roll is clicked
+		disableBets();
+	// disableOdds();
 	// disable click of roll to prevent double clicking....
 	disableRoll();
 	disableAutoRoll();
